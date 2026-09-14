@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wilmar Cachimbo — Java Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B1420;
+    --surface: #121C2B;
+    --surface-alt: #16212F;
+    --line: #223142;
+    --text: #E7EDF3;
+    --muted: #85990D; /* placeholder, overridden below */
+    --muted: #7E93A7;
+    --accent: #E6522C;
+    --accent-soft: rgba(230,82,44,.14);
+    --ok: #4CC38A;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--accent);}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px;}
+
+  /* Header / status bar */
+  .statusbar{
+    border-bottom:1px solid var(--line);
+    background:var(--surface);
+  }
+  .statusbar-inner{
+    max-width:760px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--muted);
+  }
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 3px rgba(76,195,138,.18); flex-shrink:0;}
+
+  /* Hero */
+  .hero{padding:64px 0 40px;}
+  .hero h1{
+    font-size:42px; font-weight:700; margin:0 0 6px; letter-spacing:-0.02em;
+  }
+  .hero .role{
+    color:var(--muted); font-size:18px; margin:0 0 22px;
+  }
+  .hero .meta{
+    display:flex; flex-wrap:wrap; gap:18px;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--muted);
+  }
+  .hero .meta a{color:var(--muted); text-decoration:none; border-bottom:1px dotted var(--line);}
+  .hero .meta a:hover{color:var(--accent); border-color:var(--accent);}
+
+  /* Metrics */
+  .metrics{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:6px; overflow:hidden;
+    margin:32px 0 8px;
+  }
+  .metric{background:var(--surface); padding:16px 14px;}
+  .metric .num{font-family:'IBM Plex Mono',monospace; font-size:22px; color:var(--accent); font-weight:500;}
+  .metric .lbl{font-size:12.5px; color:var(--muted); margin-top:4px;}
+
+  /* Sections */
+  section{padding:44px 0; border-top:1px solid var(--line);}
+  .section-head{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--accent);
+    margin:0 0 20px; display:flex; align-items:center; gap:10px;
+  }
+  .section-head::after{content:""; flex:1; height:1px; background:var(--line);}
+  h2.plain{font-size:22px; margin:0 0 20px; font-weight:600;}
+  p.lead{color:var(--muted); max-width:64ch;}
+
+  /* Experience timeline */
+  .job{position:relative; padding-left:26px; margin-bottom:36px;}
+  .job:last-child{margin-bottom:0;}
+  .job::before{
+    content:""; position:absolute; left:4px; top:6px; width:9px; height:9px;
+    border-radius:50%; background:var(--surface-alt); border:2px solid var(--accent);
+  }
+  .job::after{
+    content:""; position:absolute; left:8px; top:18px; bottom:-36px; width:1px; background:var(--line);
+  }
+  .job:last-child::after{display:none;}
+  .job .when{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--muted); margin-bottom:4px;}
+  .job h3{margin:0 0 2px; font-size:17px; font-weight:600;}
+  .job .place{color:var(--muted); font-size:14px; margin-bottom:10px;}
+  .job ul{margin:0; padding-left:18px; color:var(--text); font-size:15px;}
+  .job li{margin-bottom:6px;}
+
+  /* Skills */
+  .skill-group{margin-bottom:20px;}
+  .skill-group .cat{font-size:14px; color:var(--muted); margin-bottom:8px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px;
+    background:var(--surface); border:1px solid var(--line); color:var(--text);
+    padding:5px 10px; border-radius:4px;
+  }
+
+  /* Education / certs */
+  .edu-item{margin-bottom:18px;}
+  .edu-item h3{margin:0 0 2px; font-size:16px; font-weight:600;}
+  .edu-item .place{color:var(--muted); font-size:14px;}
+  .certs{margin:0; padding-left:18px; color:var(--text); font-size:15px;}
+  .certs li{margin-bottom:8px;}
+  .certs .src{color:var(--muted);}
+
+  /* Footer */
+  footer{padding:48px 0 64px; border-top:1px solid var(--line);}
+  footer .big{font-size:24px; font-weight:600; margin-bottom:10px;}
+  footer .row{display:flex; flex-wrap:wrap; gap:20px; font-family:'IBM Plex Mono', monospace; font-size:14px;}
+  footer a{text-decoration:none; border-bottom:1px dotted var(--line);}
+  footer a:hover{border-color:var(--accent);}
+  .fine{margin-top:36px; color:var(--muted); font-size:12.5px;}
+
+  @media (max-width:640px){
+    .metrics{grid-template-columns:repeat(2,1fr);}
+    .hero h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="statusbar-inner">
+    <span class="dot"></span>
+    <span>wilmar-cachimbo · disponible para nuevas oportunidades</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Wilmar Cachimbo</h1>
+    <p class="role">Java Backend Developer — Spring Boot · Microservicios · IA aplicada al desarrollo</p>
+    <div class="meta">
+      <span>Cali, Colombia</span>
+      <a href="mailto:wilmar9191@gmail.com">wilmar9191@gmail.com</a>
+      <a href="tel:+573185124103">318 512 4103</a>
+    </div>
+
+    <div class="metrics">
+      <div class="metric"><div class="num">4+</div><div class="lbl">años de experiencia</div></div>
+      <div class="metric"><div class="num">2</div><div class="lbl">empresas, sector financiero</div></div>
+      <div class="metric"><div class="num">8/17/21</div><div class="lbl">versiones de Java</div></div>
+      <div class="metric"><div class="num">100%</div><div class="lbl">backend + IA aplicada</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">perfil</div>
+    <p class="lead">
+      Ingeniero de Software especializado en desarrollo backend Java con más de 4 años de experiencia
+      construyendo microservicios y sistemas reactivos (Spring WebFlux) para el sector financiero.
+      Experto en optimización de bases de datos, mensajería asíncrona y despliegue con Docker.
+      Apasionado por la eficiencia, implementando herramientas de IA generativa para acelerar el
+      ciclo de desarrollo y entregar software de alta calidad.
+    </p>
+  </section>
+
+  <section>
+    <div class="section-head">experiencia</div>
+
+    <div class="job">
+      <div class="when">Noviembre 2023 — Agosto 2026</div>
+      <h3>Analista de Desarrollo</h3>
+      <div class="place">Smart Financial Systems · Cali, Colombia</div>
+      <ul>
+        <li>Desarrollo de servicios backend con Spring WebFlux utilizando programación reactiva.</li>
+        <li>Despliegue de aplicaciones mediante Docker y gestión de artefactos con Nexus.</li>
+        <li>Implementación de pruebas unitarias con JUnit y Mockito para garantizar calidad de software.</li>
+        <li>Optimización de consultas SQL en bases de datos Oracle para mejorar el rendimiento.</li>
+        <li>Monitoreo de aplicaciones en producción utilizando Grafana y Prometheus.</li>
+        <li>Desarrollo de soluciones en Java (versiones 8, 17 y 21).</li>
+        <li>Integración y gestión de mensajería asíncrona mediante RabbitMQ e IBM MQ.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="when">Agosto 2022 — Noviembre 2023</div>
+      <h3>Programador Junior</h3>
+      <div class="place">Procesos y Tecnología SAS · Cali, Colombia</div>
+      <ul>
+        <li>Desarrollo de APIs REST utilizando Spring Boot.</li>
+        <li>Diseño e implementación de microservicios escalables.</li>
+        <li>Creación y optimización de consultas SQL en Oracle.</li>
+        <li>Generación de reportes utilizando JasperReports.</li>
+        <li>Ejecución de pruebas unitarias con JUnit y Mockito.</li>
+        <li>Soporte técnico y mantenimiento de servicios en producción.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">habilidades técnicas</div>
+
+    <div class="skill-group">
+      <div class="cat">Lenguajes</div>
+      <div class="tags"><span class="tag">Java</span><span class="tag">JavaScript</span></div>
+    </div>
+
+    <div class="skill-group">
+      <div class="cat">Backend y frameworks</div>
+      <div class="tags">
+        <span class="tag">Spring Boot</span><span class="tag">Spring WebFlux</span>
+        <span class="tag">Spring Cloud</span><span class="tag">Microservicios</span>
+        <span class="tag">APIs REST</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="cat">Arquitectura</div>
+      <div class="tags">
+        <span class="tag">Arquitectura Hexagonal</span><span class="tag">Clean Architecture</span>
+        <span class="tag">Ports & Adapters</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="cat">Bases de datos y mensajería</div>
+      <div class="tags">
+        <span class="tag">Oracle SQL</span><span class="tag">RabbitMQ</span><span class="tag">IBM MQ</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="cat">DevOps, testing y monitoreo</div>
+      <div class="tags">
+        <span class="tag">Docker</span><span class="tag">Git</span><span class="tag">Nexus</span>
+        <span class="tag">JUnit</span><span class="tag">Mockito</span>
+        <span class="tag">Grafana</span><span class="tag">Prometheus</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="cat">IA aplicada al desarrollo</div>
+      <div class="tags">
+        <span class="tag">GitHub Copilot</span><span class="tag">Gemini CLI</span>
+        <span class="tag">Claude Code</span><span class="tag">AI-assisted development</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">educación</div>
+    <div class="edu-item">
+      <h3>Ingeniería Informática</h3>
+      <div class="place">Universidad Autónoma de Occidente — 2022</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">cursos y certificaciones</div>
+    <ul class="certs">
+      <li>IA para Developers (GitHub Copilot, Gemini CLI y Claude Code) <span class="src">— MitoCode Network</span></li>
+      <li>Bootcamp Desarrollo Web Full Stack <span class="src">— Talento Tech Valle (MinTIC)</span></li>
+      <li>Curso de Inicialización de Desarrollo con IA <span class="src">— BIG School</span></li>
+      <li>Desarrollo con IA: de 0 a Producción <span class="src">— BIG School</span></li>
+      <li>Máster Completo en Java <span class="src">— Udemy</span></li>
+      <li>Microservicios con Spring Cloud <span class="src">— Udemy</span></li>
+      <li>Programación Reactiva con Spring Boot y WebFlux <span class="src">— Udemy</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="big">¿Hablamos?</div>
+    <div class="row">
+      <a href="mailto:wilmar9191@gmail.com">wilmar9191@gmail.com</a>
+      <a href="tel:+573185124103">318 512 4103</a>
+      <span>Cali, Colombia</span>
+    </div>
+    <div class="fine">Última actualización — septiembre 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>
